@@ -9,7 +9,7 @@
   <ion-navbar color="primary">
     <ion-title>Engineers</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only>
+      <button ion-button icon-only [navPush]="addEngineerPage">
         <ion-icon name="md-add"></ion-icon>
       </button>
     </ion-buttons>
@@ -19,5 +19,13 @@
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/placeimg_640_480_arch1.jpg"/>
+      </ion-avatar>
+      <h2>Dinesh</h2>
+      <p>Software Engineer</p>
+    </ion-item>
+  </ion-list>
 </ion-content>

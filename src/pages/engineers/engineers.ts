@@ -14,7 +14,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'engineers.html',
 })
 export class EngineersPage {
-
+  // Route Variables
+  public addEngineerPage:any="AddEngineerPage";
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

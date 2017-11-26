@@ -14,8 +14,7 @@
 
 
 <ion-content padding>
-  <h1>Site Manager</h1>
-  <div class="login-form-holder">
+  <h1 text-center>Site Manager</h1>
   <form>
     <ion-list>
       <ion-item>
@@ -27,9 +26,8 @@
           <ion-input type="text"></ion-input>
       </ion-item>
     </ion-list>
-    <button ion-button icon-left id="login-btn" [navPush]="tabsPage">
+    <button ion-button icon-left [navPush]="engineerHome" full>
       <ion-icon name="md-log-in"></ion-icon>  Login
     </button>
   </form>
-</div>
 </ion-content>
