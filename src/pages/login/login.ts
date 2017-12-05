@@ -15,14 +15,23 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  // Routing variables
+  public tabsPage: any = TabsPage;
+  public engineerHome: any = "EngineerHomePage";
 
-  public tabsPage:any=TabsPage;
-  public engineerHome:any="EngineerHomePage";
+  // Class variables
+  public mobile: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  login() {
+    if (this.mobile == '9942734970') {
+      this.navCtrl.push(TabsPage)
+    } else this.navCtrl.push("EngineerHomePage");
   }
 
 }

@@ -18,16 +18,16 @@
   <form>
     <ion-list>
       <ion-item>
-          <ion-label floating>Mobile Number</ion-label>
-          <ion-input type="tel"></ion-input>
+        <ion-label floating>Mobile Number</ion-label>
+        <ion-input type="tel" [(ngModel)]="mobile" name="mobile"></ion-input>
       </ion-item>
       <ion-item>
-          <ion-label floating>PIN</ion-label>
-          <ion-input type="text"></ion-input>
+        <ion-label floating>PIN</ion-label>
+        <ion-input type="text"></ion-input>
       </ion-item>
     </ion-list>
-    <button ion-button icon-left [navPush]="engineerHome" full>
-      <ion-icon name="md-log-in"></ion-icon>  Login
+    <button ion-button icon-left full (click)="login()">
+      <ion-icon name="md-log-in"></ion-icon> Login
     </button>
   </form>
 </ion-content>
