@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { TabsPage } from '../tabs/tabs';
 /**
  * Generated class for the LoginPage page.
@@ -20,8 +20,13 @@ export class LoginPage {
   public engineerHome: any = "EngineerHomePage";
 
   // Class variables
-  public mobile: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public loginData: any = {
+    mobile: '',
+    pin: ''
+  };
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public remoteService: RemoteServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -29,9 +34,14 @@ export class LoginPage {
   }
 
   login() {
-    if (this.mobile == '9942734970') {
-      this.navCtrl.push(TabsPage)
-    } else this.navCtrl.push("EngineerHomePage");
+    /* Method to login with SM */
+    this.remoteService.signIntoSM(this.loginData)
+      .subscribe(loginSuccess => {
+        console.warn('Login Success:', loginSuccess.body);
+        let response = loginSuccess.body;
+        // if(response.er)
+
+      })
   }
 
 }

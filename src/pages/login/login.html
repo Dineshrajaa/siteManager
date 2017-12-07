@@ -19,11 +19,11 @@
     <ion-list>
       <ion-item>
         <ion-label floating>Mobile Number</ion-label>
-        <ion-input type="tel" [(ngModel)]="mobile" name="mobile"></ion-input>
+        <ion-input type="tel" [(ngModel)]="loginData.mobile" name="mobile"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>PIN</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input [(ngModel)]="loginData.pin" type="password" name="pin"></ion-input>
       </ion-item>
     </ion-list>
     <button ion-button icon-left full (click)="login()">
