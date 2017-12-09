@@ -10,7 +10,8 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class RemoteServiceProvider {
-  BASE_URL = "http://192.168.1.108:3000/api/v1/";
+  BASE_URL = "http://192.168.1.109:3000/api/v1/";
+  // BASE_URL = "https://secure-plateau-42725.herokuapp.com/api/v1/";
   constructor(public http: HttpClient) {
     console.log('Hello RemoteServiceProvider Provider');
   }

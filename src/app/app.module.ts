@@ -13,7 +13,9 @@ import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { RemoteServiceProvider } from '../providers/remote-service/remote-service';
+import { GenericProvider } from '../providers/generic/generic';
 
 @NgModule({
   declarations: [
@@ -35,8 +37,10 @@ import { RemoteServiceProvider } from '../providers/remote-service/remote-servic
   providers: [
     StatusBar,
     SplashScreen,
+    NativeStorage,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    RemoteServiceProvider
+    RemoteServiceProvider,
+    GenericProvider
   ]
 })
 export class AppModule { }
