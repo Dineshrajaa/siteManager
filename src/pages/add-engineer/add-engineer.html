@@ -14,30 +14,43 @@
 
 
 <ion-content padding>
-  <form>
+  <form [formGroup]="addengineerform">
     <ion-item>
       <ion-label floating>First Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" formControlName="name.first"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Last Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" formControlName="name.last"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Mobile</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="tel" formControlName="mobile"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>PIN</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" formControlName="pin"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Select User type</ion-label>
+      <ion-select formControlName="userType">
+        <ion-option *ngFor="let userType of userTypeList" [selected]="userType=='Engineer'" [value]="userType">{{userType}}</ion-option>
+      </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Select Project</ion-label>
-    <ion-select>
-      <ion-option>Project 1</ion-option>
-      <ion-option>Project 2</ion-option>    
-    </ion-select>    
+      <ion-select formControlName="project">
+        <ion-option *ngFor="let project of projectsList" [value]="project._id">{{project.name}}</ion-option>
+      </ion-select>
     </ion-item>
-    <button ion-button block icon-left><ion-icon name="bookmark"></ion-icon>Save Engineer</button>
+
   </form>
 </ion-content>
+
+<ion-footer no-shadow>
+  <ion-toolbar position="bottom">
+    <button ion-button block icon-left [disabled]="addengineerform.invalid" (click)="addUser()">
+      <ion-icon name="bookmark"></ion-icon>Save Engineer
+    </button>
+  </ion-toolbar>
+</ion-footer>

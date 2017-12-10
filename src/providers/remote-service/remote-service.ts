@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG } from '../../app/app.config';
+import { GenericProvider } from '../generic/generic';
 import 'rxjs/add/operator/map';
 /*
   Generated class for the RemoteServiceProvider provider.
@@ -10,9 +11,10 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class RemoteServiceProvider {
-  BASE_URL = "http://192.168.1.109:3000/api/v1/";
+  BASE_URL = "http://192.168.1.110:3000/api/v1/";
   // BASE_URL = "https://secure-plateau-42725.herokuapp.com/api/v1/";
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,
+    public genericService: GenericProvider) {
     console.log('Hello RemoteServiceProvider Provider');
   }
 
@@ -24,7 +26,8 @@ export class RemoteServiceProvider {
 
   registerEngineer(engineerData) {
     /* Service to register an engineer */
-    return this.http.post(this.BASE_URL + 'adduser', engineerData, { observe: 'response' })
+    let headers = this.genericService.getHttpHeader();
+    return this.http.post(this.BASE_URL + 'adduser', engineerData, { observe: 'response', headers: headers })
   }
 
   registerProject(projectData) {
@@ -39,12 +42,15 @@ export class RemoteServiceProvider {
 
   fetchEngineers() {
     /* Service to get the list of engineers */
-    return this.http.get(this.BASE_URL + 'listAllEngineers', { observe: 'response' })
+    let headers = this.genericService.getHttpHeader();
+    return this.http.get(this.BASE_URL + 'listAllEngineers', { observe: 'response', headers: headers })
   }
 
   fetchProjects() {
     /* Service to get the list of projects */
-    return this.http.get(this.BASE_URL + 'listAllProjects', { observe: 'response' })
+    let headers = this.genericService.getHttpHeader();
+    console.warn('headers:', headers);
+    return this.http.get(this.BASE_URL + 'listAllProjects', { observe: 'response', headers: headers })
   }
 
   fetchComments(projectID) {

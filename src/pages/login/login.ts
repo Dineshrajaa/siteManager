@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { TabsPage } from '../tabs/tabs';
 import { HttpResponse } from '@angular/common/http';
+import { JwtHelper } from 'angular2-jwt';
 import { GenericProvider } from '../../providers/generic/generic';
 /**
  * Generated class for the LoginPage page.
@@ -29,7 +30,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public remoteService: RemoteServiceProvider,
-    public genericService: GenericProvider) {
+    public genericService: GenericProvider,
+    public jwtHelper: JwtHelper) {
   }
 
   ionViewDidLoad() {
@@ -45,11 +47,27 @@ export class LoginPage {
         console.log("POST data:", res.error);
         if (!res.error) {
           // Login successful
-          this.genericService.saveItem('accessToken', res.token)
+          localStorage.setItem('accessToken', res.token);
+          let parsedToken = this.jwtHelper.decodeToken(res.token);
+          if (parsedToken.userType === "Admin")
+            // Admin User
+            this.navCtrl.setRoot(TabsPage);
+          else
+            // Engineer
+            this.navCtrl.setRoot("EngineerHomePage");
+          /* this.genericService.saveItem('accessToken', res.token)
             .then((savedToken) => {
               this.genericService.showToast(res.message);
+              let parsedToken = this.jwtHelper.decodeToken(res.token);
+              if (parsedToken.userType === "Admin")
+                // Admin User
+                this.navCtrl.setRoot(TabsPage);
+              else
+                // Engineer
+                this.navCtrl.setRoot("EngineerHomePage");
+              console.warn(parsedToken);
             },
-            error => console.error('Error storing item', error))
+            error => console.error('Error storing item', error)) */
         } else {
           this.genericService.showToast(res.message);
         }

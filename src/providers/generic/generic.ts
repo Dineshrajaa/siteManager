@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoadingController, ToastController } from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
@@ -48,6 +48,16 @@ export class GenericProvider {
 
   getSavedItem(key) {
     return this.nativeStorage.getItem(key)
+  }
+
+  getJWTToken() {
+    return localStorage.getItem('accessToken')
+  }
+
+  getHttpHeader() {
+    let headers = new HttpHeaders().set('Authorization', `Bearer ${this.getJWTToken()}`);
+    console.warn('this.getJWTToken():', this.getJWTToken());
+    return headers;
   }
 
 }

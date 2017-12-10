@@ -16,6 +16,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { RemoteServiceProvider } from '../providers/remote-service/remote-service';
 import { GenericProvider } from '../providers/generic/generic';
+import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { JwtHelper } from 'angular2-jwt';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { GenericProvider } from '../providers/generic/generic';
     SplashScreen,
     NativeStorage,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AUTH_PROVIDERS,
+    JwtHelper,
     RemoteServiceProvider,
     GenericProvider
   ]
