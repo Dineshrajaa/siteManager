@@ -35,6 +35,7 @@ export class ProjectsPage {
     this.listProjects();
     console.log('ionViewDidLoad EngineersPage');
   }
+
   listProjects() {
     // Method to list projects
     this.genericService.showLoader("Fetching Projects");
@@ -51,6 +52,12 @@ export class ProjectsPage {
       }, () => {
         this.genericService.hideLoader();
       })
+  }
+
+  editProject(projectToEdit) {
+    // Method to edit project
+    console.warn('projectToEdit:', projectToEdit);
+    this.navCtrl.push("AddProjectPage", { 'projectInfo': projectToEdit });
   }
 
 }

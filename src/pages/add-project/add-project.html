@@ -25,7 +25,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Select Engineer</ion-label>
-      <ion-select formControlName="engineerInCharge">
+      <ion-select formControlName="engineerInCharge" multiple="true">
         <ion-option *ngFor="let engineer of engineersList" [value]="engineer._id">{{engineer.name.full}}</ion-option>
       </ion-select>
     </ion-item>
@@ -33,8 +33,11 @@
 </ion-content>
 <ion-footer no-shadow>
   <ion-toolbar position="bottom">
-    <button ion-button block icon-left (click)="addProject()">
+    <button ion-button block icon-left *ngIf="!editProjectFlag" (click)="addProject()">
       <ion-icon name="bookmark"></ion-icon>Save Project
+    </button>
+    <button ion-button block icon-left *ngIf="editProjectFlag" (click)="updateProject()">
+      <ion-icon name="bookmark"></ion-icon>Update Project
     </button>
   </ion-toolbar>
 </ion-footer>

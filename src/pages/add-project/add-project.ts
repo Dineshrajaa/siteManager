@@ -24,7 +24,8 @@ export class AddProjectPage {
 
   // Variables
   public engineersList: any;
-
+  public editProjectFlag: boolean = false;
+  public projectInfoToBeEdited: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -36,6 +37,12 @@ export class AddProjectPage {
       'location': ['', Validators.required],
       'engineerInCharge': ''
     });
+    this.projectInfoToBeEdited = this.navParams.get('projectInfo');
+    if (typeof this.projectInfoToBeEdited != 'undefined') {
+      this.editProjectFlag = true;
+      this.prefillProjectInfo();
+    }
+    console.warn(this.navParams.get('projectInfo'));
   }
 
   ionViewDidLoad() {
@@ -47,6 +54,40 @@ export class AddProjectPage {
     console.log('ionViewDidLoad EngineersPage');
   }
 
+  prefillProjectInfo() {
+    // Method to prefill project info
+    let projectInfo = this.projectInfoToBeEdited;
+    let engineersList = [];
+    projectInfo.engineerInCharge.forEach(engineer => {
+      engineersList.push(engineer._id);
+    });
+    this.addprojectform.patchValue({
+      name: projectInfo.name,
+      location: projectInfo.location,
+      engineerInCharge: engineersList
+    })
+  }
+
+  updateProject() {
+    // Method to update
+    let projectId = this.projectInfoToBeEdited._id;
+    this.genericService.showLoader('Updating Project');
+    let projectInfo = this.addprojectform.value;
+    this.remoteService.updateProject(projectId, projectInfo)
+      .subscribe((response: HttpResponse<any>) => {
+        let res = response.body;
+        if (!res.error) {
+          this.genericService.showToast('Updated Project');
+          this.navCtrl.pop(); // go back to engineers list
+        } else {
+          this.genericService.showToast('Unable to update Project');
+        }
+        this.genericService.hideLoader();
+      }, error => {
+        this.genericService.showToast('Something has gone wrong');
+        this.genericService.hideLoader();
+      })
+  }
   listEngineers() {
     // Method to list projects
     this.genericService.showLoader("Fetching Engineers");
