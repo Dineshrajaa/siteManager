@@ -33,7 +33,7 @@ export class EngineersPage {
     public call: CallNumber) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.listEngineers();
     console.log('ionViewDidLoad EngineersPage');
   }

@@ -36,13 +36,15 @@ export class AddEngineerPage {
       'userType': ['', Validators.required],
       'project': ''
     });
-    this.listProjects();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddEngineerPage');
   }
-
+  ionViewWillEnter() {
+    this.listProjects();
+    console.log('ionViewDidLoad EngineersPage');
+  }
   listProjects() {
     // Method to list projects
     this.genericService.showLoader("Fetching Projects");
@@ -65,6 +67,8 @@ export class AddEngineerPage {
     console.warn('Engineer form:', this.addengineerform.value);
     this.genericService.showLoader('Saving User');
     let engineerInfo = this.addengineerform.value;
+    if (engineerInfo.project == '')
+      delete engineerInfo['project'];
     this.remoteService.registerEngineer(engineerInfo)
       .subscribe((response: HttpResponse<any>) => {
         let res = response.body;

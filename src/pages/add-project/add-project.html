@@ -14,26 +14,27 @@
 
 
 <ion-content padding>
-    <form>
-        <ion-item>
-          <ion-label floating>Project Name</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Project Location</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Mobile</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Select Engineer</ion-label>
-        <ion-select>
-          <ion-option>Engineer 1</ion-option>
-          <ion-option>Engineer 2</ion-option>    
-        </ion-select>    
-        </ion-item>
-        <button ion-button block icon-left><ion-icon name="bookmark"></ion-icon>Save Project</button>
-      </form>
+  <form [formGroup]="addprojectform">
+    <ion-item>
+      <ion-label floating>Project Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Project Location</ion-label>
+      <ion-input type="text" formControlName="location"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Select Engineer</ion-label>
+      <ion-select formControlName="engineerInCharge">
+        <ion-option *ngFor="let engineer of engineersList" [value]="engineer._id">{{engineer.name.full}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </form>
 </ion-content>
+<ion-footer no-shadow>
+  <ion-toolbar position="bottom">
+    <button ion-button block icon-left (click)="addProject()">
+      <ion-icon name="bookmark"></ion-icon>Save Project
+    </button>
+  </ion-toolbar>
+</ion-footer>

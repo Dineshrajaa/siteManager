@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { GenericProvider } from '../../providers/generic/generic';
+import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
+import { HttpResponse } from '@angular/common/http';
 /**
  * Generated class for the ProjectsPage page.
  *
@@ -15,13 +17,40 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProjectsPage {
   // Route Variables
-  public addProjectPage:any="AddProjectPage";
-  public commentsPage:any="CommentsPage";
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public addProjectPage: any = "AddProjectPage";
+  public commentsPage: any = "CommentsPage";
+  public projectsList: any;
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public remoteService: RemoteServiceProvider,
+    public genericService: GenericProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProjectsPage');
+  }
+
+  ionViewWillEnter() {
+    this.listProjects();
+    console.log('ionViewDidLoad EngineersPage');
+  }
+  listProjects() {
+    // Method to list projects
+    this.genericService.showLoader("Fetching Projects");
+    this.remoteService.fetchProjects()
+      .subscribe((response: HttpResponse<any>) => {
+        console.log(response);
+        let res = response.body;
+        if (!res.error) {
+          this.projectsList = res.result; // get the list of projects
+        }
+      }, error => {
+        console.log(error);
+        this.genericService.hideLoader();
+      }, () => {
+        this.genericService.hideLoader();
+      })
   }
 
 }

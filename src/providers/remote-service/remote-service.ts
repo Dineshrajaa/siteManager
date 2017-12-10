@@ -11,8 +11,8 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class RemoteServiceProvider {
-  BASE_URL = "http://192.168.1.110:3000/api/v1/";
-  // BASE_URL = "https://secure-plateau-42725.herokuapp.com/api/v1/";
+  // BASE_URL = "http://192.168.1.110:3000/api/v1/";
+  BASE_URL = "https://secure-plateau-42725.herokuapp.com/api/v1/";
   constructor(public http: HttpClient,
     public genericService: GenericProvider) {
     console.log('Hello RemoteServiceProvider Provider');
@@ -32,7 +32,8 @@ export class RemoteServiceProvider {
 
   registerProject(projectData) {
     /* Service to register a project */
-    return this.http.post(this.BASE_URL + 'addProject', projectData, { observe: 'response' })
+    let headers = this.genericService.getHttpHeader();
+    return this.http.post(this.BASE_URL + 'addProject', projectData, { observe: 'response', headers: headers })
   }
 
   registerComment(commentData) {

@@ -19,33 +19,19 @@
 
 
 <ion-content padding>
-  <ion-card>
+  <ion-card *ngFor="let project of projectsList">
     <img src="assets/imgs/placeimg_640_480_arch.jpg" height="200" />
     <ion-card-content>
       <ion-card-title>
-        Jeeva Nagar Flat
+        {{project.name}}
       </ion-card-title>
-      <ion-note>
-        11h ago
-      </ion-note>
       <p>
-        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+        {{project.location}}
       </p>
       <button ion-button icon-left color="primary" clear full [navPush]="commentsPage">
         <ion-icon name="chatboxes"></ion-icon>
         Comment
       </button>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <img src="assets/imgs/placeimg_640_480_arch1.jpg" height="200" />
-    <ion-card-content>
-      <ion-card-title>
-        Another Nagar Flat
-      </ion-card-title>
-      <p>
-        The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
-      </p>
     </ion-card-content>
   </ion-card>
 </ion-content>
