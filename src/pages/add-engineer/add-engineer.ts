@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { GenericProvider } from '../../providers/generic/generic';
 
@@ -16,7 +15,7 @@ import { GenericProvider } from '../../providers/generic/generic';
 @IonicPage()
 @Component({
   selector: 'page-add-engineer',
-  templateUrl: 'add-engineer.html',
+  templateUrl: 'add-engineer.html'
 })
 
 export class AddEngineerPage {
@@ -32,8 +31,8 @@ export class AddEngineerPage {
     this.addengineerform = this.formBuilder.group({
       'name.first': ['', Validators.required],
       'name.last': '',
-      'mobile': ['', Validators.required],
-      'pin': ['', Validators.required],
+      'mobile': ['', Validators.required, Validators.minLength(10), Validators.maxLength(10)],
+      'pin': ['', Validators.required, Validators.minLength(4)],
       'userType': ['', Validators.required],
       'project': ''
     });

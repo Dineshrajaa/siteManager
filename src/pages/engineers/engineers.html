@@ -20,12 +20,20 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/imgs/placeimg_640_480_arch1.jpg"/>
-      </ion-avatar>
-      <h2>Dinesh</h2>
-      <p>Software Engineer</p>
-    </ion-item>
+    <ion-item-sliding *ngFor="let engineer of engineersList" #item>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="assets/imgs/placeimg_640_480_arch1.jpg" />
+        </ion-avatar>
+        <h2>{{engineer.name.full}}</h2>
+        <p *ngIf="engineer.project">{{engineer.project.name}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="secondary" (click)="callNumber(engineer.mobile)">
+          <ion-icon name="call"></ion-icon>
+          Call
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
