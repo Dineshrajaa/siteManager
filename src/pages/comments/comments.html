@@ -19,8 +19,18 @@
       <ion-avatar item-start>
         <img src="assets/imgs/placeimg_640_480_arch1.jpg">
       </ion-avatar>
-      <h2>Dinesh</h2>
+      <h1>Dinesh</h1>
       <p>Completed Designing Admin Panel</p>
+      <ion-note>
+        16 August 2017 08:00PM
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/imgs/placeimg_640_480_arch1.jpg">
+      </ion-avatar>
+      <h1>Dinesh</h1>
+      <img src="assets/imgs/placeimg_640_480_arch1.jpg">
       <ion-note>
         16 August 2017 08:00PM
       </ion-note>
@@ -29,12 +39,12 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-input type="text" start placeholder="Comment here"></ion-input>
+    <ion-input type="text" start placeholder="Comment here" #commentBox></ion-input>
     <ion-buttons end>
-      <button ion-button icon-right color="primary">
+      <button ion-button icon-right color="primary" (click)="presentActionSheet()" *ngIf="commentBox.value.length==0">
         <ion-icon name="camera"></ion-icon>
       </button>
-      <button ion-button icon-right color="primary">
+      <button ion-button icon-right color="primary" (click)="postText(commentBox.value)" *ngIf="commentBox.value.length>0">
         <ion-icon name="send"></ion-icon>
       </button>
     </ion-buttons>

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoadingController, ToastController } from 'ionic-angular';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { JwtHelper } from 'angular2-jwt';
 /*
   Generated class for the GenericProvider provider.
 
@@ -15,7 +16,8 @@ export class GenericProvider {
   constructor(public http: HttpClient,
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
-    public nativeStorage: NativeStorage) {
+    public nativeStorage: NativeStorage,
+    public jwtHelper: JwtHelper) {
     console.log('Hello GenericProvider Provider');
   }
 
@@ -58,6 +60,11 @@ export class GenericProvider {
     let headers = new HttpHeaders().set('Authorization', `Bearer ${this.getJWTToken()}`);
     console.warn('this.getJWTToken():', this.getJWTToken());
     return headers;
+  }
+
+  getUserID() {
+    let parsedToken = this.jwtHelper.decodeToken(this.getJWTToken());
+    return parsedToken.id;
   }
 
 }
