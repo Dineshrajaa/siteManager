@@ -31,8 +31,8 @@ export class AddEngineerPage {
     this.addengineerform = this.formBuilder.group({
       'name.first': ['', Validators.required],
       'name.last': '',
-      'mobile': ['', Validators.required, Validators.minLength(10), Validators.maxLength(10)],
-      'pin': ['', Validators.required, Validators.minLength(4)],
+      'mobile': ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
+      'pin': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'userType': ['', Validators.required],
       'project': ''
     });

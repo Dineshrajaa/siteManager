@@ -24,8 +24,8 @@ export class LoginPage {
 
   // Class variables
   public loginData: any = {
-    mobile: '9942734970',
-    pin: '9375'
+    mobile: '',
+    pin: ''
   };
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
