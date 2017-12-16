@@ -15,26 +15,27 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
+    <ion-item *ngFor="let comment of commentsList">
       <ion-avatar item-start>
         <img src="assets/imgs/placeimg_640_480_arch1.jpg">
       </ion-avatar>
-      <h1>Dinesh</h1>
-      <p>Completed Designing Admin Panel</p>
-      <ion-note>
-        16 August 2017 08:00PM
+      <h1>{{comment.commentedBy.name.full}}</h1>
+      <p *ngIf="comment.commentType=='Text'">{{comment.commentText}}</p>
+      <img *ngIf="comment.commentType=='Picture'" [src]="comment.commentPicture">
+      <ion-note float-left>
+        {{comment.commentedDate}}
       </ion-note>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-avatar item-start>
         <img src="assets/imgs/placeimg_640_480_arch1.jpg">
       </ion-avatar>
       <h1>Dinesh</h1>
       <img src="assets/imgs/placeimg_640_480_arch1.jpg">
-      <ion-note>
+      <ion-note float-left>
         16 August 2017 08:00PM
       </ion-note>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
 </ion-content>
 <ion-footer>

@@ -7,6 +7,7 @@ import { File } from '@ionic-native/file';
 import { GenericProvider } from '../../providers/generic/generic';
 import { RemoteServiceProvider } from '../../providers/remote-service/remote-service';
 import { HttpResponse } from '@angular/common/http';
+import * as moment from 'moment';
 
 /**
  * Generated class for the CommentsPage page.
@@ -30,6 +31,8 @@ export class CommentsPage {
   };
   fileTransfer: FileTransferObject = this.transfer.create();
   selectedProject: any;
+  commentsList: any;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
@@ -44,6 +47,7 @@ export class CommentsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommentsPage');
+    this.listComments();
   }
 
   presentActionSheet() {
@@ -126,12 +130,12 @@ export class CommentsPage {
     this.saveComment(commentData);
   }
 
-  postText(text){
+  postText(text) {
     // Method to post text comment
     let commentData = {
       projectID: this.selectedProject._id,
       commentType: "Text",
-      commentPicture: text,
+      commentText: text,
       commentedBy: this.genericService.getUserID()
     };
     this.saveComment(commentData);
@@ -143,6 +147,27 @@ export class CommentsPage {
       .subscribe((response: HttpResponse<any>) => {
         let res = response.body;
         console.warn('Res:', res);
+        this.listComments();
+      }, error => {
+        console.log("Comment Error:", error);
+        this.genericService.hideLoader();
+      }, () => {
+        this.genericService.hideLoader();
+      })
+  }
+
+  listComments() {
+    // Method to list comments for this project
+    this.remoteService.fetchComments(this.selectedProject._id)
+      .subscribe((response: HttpResponse<any>) => {
+        let res = response.body;
+        if (!res.error) {
+          this.commentsList = res.result;
+          this.commentsList.forEach((comment) => {
+            let commentedDate = comment.commentedDate;
+            comment.commentedDate = moment(commentedDate).fromNow();
+          })
+        }
       }, error => {
         console.log("Comment Error:", error);
         this.genericService.hideLoader();
