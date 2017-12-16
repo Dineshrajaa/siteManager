@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -32,6 +32,8 @@ export class CommentsPage {
   fileTransfer: FileTransferObject = this.transfer.create();
   selectedProject: any;
   commentsList: any;
+
+  @ViewChild('commentBox') commentBox;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -147,6 +149,7 @@ export class CommentsPage {
       .subscribe((response: HttpResponse<any>) => {
         let res = response.body;
         console.warn('Res:', res);
+        this.commentBox.value = ''; // clear input field
         this.listComments();
       }, error => {
         console.log("Comment Error:", error);

@@ -64,4 +64,9 @@ export class RemoteServiceProvider {
     /* Service to get the list of comments */
     return this.http.get(this.BASE_URL + 'getComments/' + projectID, { observe: 'response' })
   }
+
+  fetchMyProjects(engineerID) {
+    /* Service to get the list of projects of a specific user */
+    return this.http.get(this.BASE_URL + 'listMyProjects/' + engineerID, { observe: 'response' })
+  }
 }
