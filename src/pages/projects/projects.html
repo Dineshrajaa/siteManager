@@ -20,6 +20,9 @@
 
 <ion-content padding>
   <ion-list>
+    <ion-item *ngIf="projectsList?.length===0">
+      <h2>No Projects found</h2>
+    </ion-item>
     <ion-item-sliding *ngFor="let project of projectsList" #item>
       <ion-item>
         <ion-avatar item-start>

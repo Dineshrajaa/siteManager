@@ -15,12 +15,15 @@
 
 <ion-content padding>
   <ion-list>
+    <ion-item *ngIf="commentsList?.length===0">
+      <h2>No Comments found</h2>
+    </ion-item>
     <ion-item *ngFor="let comment of commentsList">
       <ion-avatar item-start>
         <img src="assets/imgs/placeimg_640_480_arch1.jpg">
       </ion-avatar>
       <h1>{{comment.commentedBy.name.full}}</h1>
-      <p *ngIf="comment.commentType=='Text'">{{comment.commentText}}</p>
+      <p *ngIf="comment.commentType=='Text'" text-wrap>{{comment.commentText}}</p>
       <img *ngIf="comment.commentType=='Picture'" [src]="comment.commentPicture">
       <ion-note float-left>
         {{comment.commentedDate}}
@@ -40,7 +43,8 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-input type="text" start placeholder="Comment here" #commentBox></ion-input>
+    <!-- <ion-input type="text" start placeholder="Comment here" #commentBox></ion-input> -->
+    <ion-textarea start placeholder="Comment here" #commentBox></ion-textarea>
     <ion-buttons end>
       <button ion-button icon-right color="primary" (click)="presentActionSheet()" *ngIf="commentBox.value.length==0">
         <ion-icon name="camera"></ion-icon>

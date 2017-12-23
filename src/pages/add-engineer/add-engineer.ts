@@ -76,7 +76,7 @@ export class AddEngineerPage {
           this.genericService.showToast('Added Engineer');
           this.navCtrl.pop(); // go back to engineers list
         } else {
-          this.genericService.showToast('Unable to add Engineer');
+          this.genericService.showToast(res.reason);
         }
         this.genericService.hideLoader();
       }, error => {

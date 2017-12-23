@@ -20,6 +20,9 @@
 
 <ion-content padding>
   <ion-list>
+    <ion-item *ngIf="engineersList?.length===0">
+      <h2>No Engineers found</h2>
+    </ion-item>
     <ion-item-sliding *ngFor="let engineer of engineersList" #item>
       <ion-item>
         <ion-avatar item-start>
